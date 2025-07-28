@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LuxeTrip - 澳洲旅行专家</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#FF6B00',secondary:'#1A5276'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Arial', sans-serif;
+}
+.swiper-pagination-bullet-active {
+background-color: #FF6B00 !important;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.custom-checkbox {
+display: none;
+}
+.custom-checkbox-label {
+position: relative;
+padding-left: 28px;
+cursor: pointer;
+}
+.custom-checkbox-label:before {
+content: '';
+position: absolute;
+left: 0;
+top: 0;
+width: 20px;
+height: 20px;
+border: 2px solid #ddd;
+border-radius: 4px;
+background-color: white;
+}
+.custom-checkbox:checked + .custom-checkbox-label:before {
+background-color: #FF6B00;
+border-color: #FF6B00;
+}
+.custom-checkbox:checked + .custom-checkbox-label:after {
+content: '';
+position: absolute;
+left: 7px;
+top: 3px;
+width: 6px;
+height: 12px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+</style>
+</head>
+<body class="bg-gray-50">
+<!-- 顶部导航栏 -->
+<header class="bg-white shadow-sm">
+<!-- 顶部信息栏 -->
+<div class="bg-gray-100 py-1">
+<div class="container mx-auto px-4 flex justify-between items-center text-xs text-gray-600">
+<div class="flex items-center space-x-4">
+<span data-lang-welcome>欢迎来到 LuxeTrip澳洲旅行专家</span>
+<a href="#" class="hover:text-primary" data-lang-login>登录</a>
+<a href="https://luxetrip.com.au/User-Registration.html" data-readdy="true" class="hover:text-primary" data-lang-register>注册</a>
+</div>
+<div class="flex items-center space-x-4">
+<a href="#" id="customerServiceLink" class="flex items-center hover:text-primary">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-customer-service-2-line"></i></span>
+<span data-lang-customer-service>客服热线: +61 478776998</span>
+</a>
+<a href="#" class="flex items-center hover:text-primary">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-user-line"></i></span>
+<span data-lang-member-center>会员中心</span>
+</a>
+<a href="#" class="flex items-center hover:text-primary">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-shopping-cart-line"></i></span>
+<span data-lang-my-orders>我的订单</span>
+</a>
+</div>
+</div>
+</div>
+<!-- 主导航栏 -->
+<div class="container mx-auto px-4 py-3 flex justify-between items-center">
+<div class="flex items-center">
+<a href="#" class="text-2xl font-['Pacifico'] text-primary mr-8">Luxetrip</a>
+<!-- 搜索框 -->
+<div class="relative">
+<input type="text" placeholder="搜索目的地、酒店、景点" class="w-96 pl-4 pr-10 py-2 border border-gray-300 rounded-button focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm">
+<button class="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-search-line text-lg"></i>
+</button>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="relative" id="languageSelector">
+<button class="flex items-center text-sm hover:text-primary px-3 py-1 border border-gray-200 rounded-button">
+<span class="w-5 h-5 flex items-center justify-center mr-1"><i class="ri-global-line"></i></span>
+<span id="currentLang">中文</span>
+<span class="w-4 h-4 flex items-center justify-center ml-1"><i class="ri-arrow-down-s-line"></i></span>
+</button>
+<div class="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg py-2 hidden w-24" id="languageMenu">
+<a href="#" class="block px-4 py-1 text-sm hover:bg-gray-100 cursor-pointer" data-lang="zh">中文</a>
+<a href="#" class="block px-4 py-1 text-sm hover:bg-gray-100 cursor-pointer" data-lang="en">English</a>
+</div>
+</div>
+<a href="#" class="flex items-center text-sm hover:text-primary">
+<span class="w-5 h-5 flex items-center justify-center mr-1"><i class="ri-map-pin-line"></i></span>
+<span>门店查询</span>
+</a>
+<a href="#" class="flex items-center text-sm hover:text-primary">
+<span class="w-5 h-5 flex items-center justify-center mr-1"><i class="ri-phone-line"></i></span>
+<span>0478776998</span>
+</a>
+</div>
+</div>
+<!-- 分类导航 -->
+<nav class="bg-primary">
+<div class="container mx-auto px-4">
+<ul class="flex text-white">
+<li class="py-3 px-5 font-medium hover:bg-primary/80 cursor-pointer" data-lang-nav-home>首页</li>
+<li><a href="https://luxetrip.com.au/local-tour.html" data-readdy="true" class="py-3 px-5 font-medium hover:bg-primary/80 cursor-pointer inline-block" data-lang-nav-local>本地游</a></li>
+<li><a href="https://luxetrip.com.au/Charter-Tour.html" data-readdy="true" class="py-3 px-5 font-medium hover:bg-primary/80 cursor-pointer inline-block" data-lang-nav-custom>包车游</a></li>
+<li><a href="https://luxetrip.com.au/China-tour.html" data-readdy="true" class="py-3 px-5 font-medium hover:bg-primary/80 cursor-pointer inline-block" data-lang-nav-china>中国游</a></li>
+<li><a href="https://luxetrip.com.au/Outbound.html" class="py-3 px-5 font-medium hover:bg-primary/80 cursor-pointer inline-block" data-lang-nav-global>出境游</a></li>
+<li><a href="https://sell.sctt.net/481297/zh-cn/aud" data-readdy="true" class="py-3 px-5 font-medium hover:bg-primary/80 cursor-pointer inline-block" data-lang-nav-business>门票</a></li>
+<li><a href="https://luxetrip.com.au/news.html" data-readdy="true" class="py-3 px-5 font-medium hover:bg-primary/80 cursor-pointer inline-block" data-lang-nav-visa>最新消息</a></li>
+</ul>
+</div>
+</nav>
+</header>
+<!-- 轮播图 Banner -->
+<section class="relative h-96 overflow-hidden">
+<div class="slides-container relative w-full h-full">
+
+<!-- 日本 -->
+<div class="slide absolute inset-0 opacity-0 transition-opacity duration-500" style="background-image: url('JAPAN-MAIN.jpg'); background-size: cover; background-position: center;">
+<div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+<div class="container mx-auto px-4 h-full flex items-center relative">
+<div class="max-w-xl text-white">
+<h1 class="text-4xl font-bold mb-4">圣诞限定·日本纯享11日</h1>
+<p class="text-xl mb-6">年度最暖爆款！$2599 起，无购物·零自费·纯享旅程！</p>
+<div class="flex space-x-4">
+<a href="https://luxetrip.com.au/Japan-11-Day.html" data-readdy="true" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 !rounded-button whitespace-nowrap cursor-pointer inline-block">立即预订</a>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- 雪山 -->
+<div class="slide absolute inset-0 opacity-0 transition-opacity duration-500" style="background-image: url('https://readdy.ai/api/search-image?query=Thredbo%2520ski%2520resort%2520Australia%2520with%2520snow-covered%2520slopes%252C%2520ski%2520lifts%252C%2520mountain%2520lodge%252C%2520dramatic%2520winter%2520landscape%252C%2520snow%2520gums%252C%2520blue%2520sky%252C%2520professional%2520winter%2520sports%2520photography%252C%2520high%2520resolution&width=1200&height=500&seq=41&orientation=landscape'); background-size: cover; background-position: center;">
+<div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+<div class="container mx-auto px-4 h-full flex items-center relative">
+<div class="max-w-xl text-white">
+<h1 class="text-4xl font-bold mb-4">Thredbo 雪山之旅</h1>
+<p class="text-xl mb-6">澳洲最佳滑雪胜地，冬季限定体验</p>
+<div class="flex space-x-4">
+<a href="https://luxetrip.com.au/Japan-11-Day.html" data-readdy="true" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 !rounded-button whitespace-nowrap cursor-pointer inline-block">立即预订</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 墨尔本 -->
+<div class="slide absolute inset-0 opacity-0 transition-opacity duration-500" style="background-image: url('https://readdy.ai/api/search-image?query=Jervis%2520Bay%2520whale%2520watching%2520cruise%2520with%2520humpback%2520whale%2520breaching%252C%2520turquoise%2520ocean%2520water%252C%2520dramatic%2520coastal%2520cliffs%252C%2520perfect%2520weather%2520with%2520blue%2520sky%2520and%2520white%2520clouds%252C%2520professional%2520wildlife%2520photography%252C%2520high%2520resolution&width=1200&height=500&seq=42&orientation=landscape'); background-size: cover; background-position: center;">
+<div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+<div class="container mx-auto px-4 h-full flex items-center relative">
+<div class="max-w-xl text-white">
+<h1 class="text-4xl font-bold mb-4">杰维斯湾观鲸之旅</h1>
+<p class="text-xl mb-6">近距离邂逅海洋巨兽，感受自然奇迹</p>
+<div class="flex space-x-4">
+<a href="https://luxetrip.com.au/Jervis-Bay.html" data-readdy="true" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 !rounded-button whitespace-nowrap cursor-pointer inline-block">立即预订</a>
+</div>
+</div>
+</div>
+</div>
+<!-- 黄金海岸 -->
+<div class="slide absolute inset-0 opacity-0 transition-opacity duration-500" style="background-image: url('https://readdy.ai/api/search-image?query=Gold%2520Coast%2520Australia%2520with%2520Surfers%2520Paradise%2520skyline%252C%2520beautiful%2520beaches%252C%2520surfers%2520in%2520water%252C%2520sunny%2520day%252C%2520blue%2520sky%252C%2520professional%2520travel%2520photography%252C%2520high%2520resolution&width=1200&height=500&seq=43&orientation=landscape'); background-size: cover; background-position: center;">
+<div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+<div class="container mx-auto px-4 h-full flex items-center relative">
+<div class="max-w-xl text-white">
+<h1 class="text-4xl font-bold mb-4">黄金海岸阳光假期</h1>
+<p class="text-xl mb-6">冲浪者天堂，主题乐园，尽享欢乐</p>
+<div class="flex space-x-4">
+<a href="https://luxetrip.com.au/Japan-11-Day.html" data-readdy="true" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 !rounded-button whitespace-nowrap cursor-pointer inline-block">立即预订</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 轮播指示器 -->
+<div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+<button class="w-3 h-3 rounded-full bg-primary slide-indicator cursor-pointer" data-index="0"></button>
+<button class="w-3 h-3 rounded-full bg-white/50 slide-indicator cursor-pointer" data-index="1"></button>
+<button class="w-3 h-3 rounded-full bg-white/50 slide-indicator cursor-pointer" data-index="2"></button>
+<button class="w-3 h-3 rounded-full bg-white/50 slide-indicator cursor-pointer" data-index="3"></button>
+</div>
+</section>
+<!-- 预订服务区域 -->
+<section class="container mx-auto px-4 py-8">
+<div class="bg-white rounded-lg shadow-lg overflow-hidden">
+<!-- 导航标签 -->
+<div class="flex border-b">
+<button class="flex-1 py-4 px-6 text-center focus:outline-none relative group active" data-tab="flight">
+<div class="flex items-center justify-center space-x-2">
+<span class="w-5 h-5 flex items-center justify-center"><i class="ri-flight-takeoff-line"></i></span>
+<span>机票</span>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-100 transition-transform"></div>
+</button>
+<button class="flex-1 py-4 px-6 text-center focus:outline-none relative group" data-tab="hotel">
+<div class="flex items-center justify-center space-x-2">
+<span class="w-5 h-5 flex items-center justify-center"><i class="ri-hotel-line"></i></span>
+<span>酒店</span>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 transition-transform"></div>
+</button>
+<button class="flex-1 py-4 px-6 text-center focus:outline-none relative group" data-tab="transfer" id="transferTab">
+<div class="flex items-center justify-center space-x-2">
+<span class="w-5 h-5 flex items-center justify-center"><i class="ri-taxi-line"></i></span>
+<span>接送机</span>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 group-[.active]:scale-x-100 transition-transform"></div>
+</button>
+</div>
+<!-- 搜索表单区域 -->
+<div class="p-6">
+<!-- 机票搜索表单 -->
+<div class="tab-content" id="flightTab">
+<div class="mb-4">
+<div class="flex space-x-4 mb-6">
+<button class="px-4 py-2 bg-primary text-white rounded-full text-sm">单程</button>
+<button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm hover:bg-gray-200">往返</button>
+<button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm hover:bg-gray-200">多目的地</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="col-span-1">
+<label class="block text-sm font-medium text-gray-700 mb-1">出发城市</label>
+<div class="relative">
+<input type="text" class="w-full border border-gray-300 rounded-button pl-10 pr-4 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary" placeholder="请选择出发城市">
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-flight-takeoff-line"></i>
+</span>
+</div>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-medium text-gray-700 mb-1">到达城市</label>
+<div class="relative">
+<input type="text" class="w-full border border-gray-300 rounded-button pl-10 pr-4 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary" placeholder="请选择到达城市">
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-flight-land-line"></i>
+</span>
+</div>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-medium text-gray-700 mb-1">出发日期</label>
+<div class="relative">
+<input type="date" class="w-full border border-gray-300 rounded-button pl-10 pr-4 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary">
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-calendar-line"></i>
+</span>
+</div>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-medium text-gray-700 mb-1">乘客</label>
+<div class="relative">
+<button type="button" class="w-full border border-gray-300 rounded-button pl-10 pr-4 py-2 text-left focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary">
+1 成人, 经济舱
+</button>
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-user-line"></i>
+</span>
+<span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-arrow-down-s-line"></i>
+</span>
+</div>
+</div>
+</div>
+<div class="mt-6 flex justify-center">
+<a href="https://luxetrip.com.au/Flight-Search" data-readdy="true" class="bg-primary hover:bg-primary/90 text-white px-12 py-2 !rounded-button whitespace-nowrap cursor-pointer inline-flex items-center">
+<span class="w-5 h-5 inline-flex items-center justify-center mr-1"><i class="ri-search-line"></i></span>
+搜索机票
+</a>
+</div>
+</div>
+</div>
+<!-- 酒店搜索表单 -->
+<div class="tab-content hidden" id="hotelTab">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="col-span-1 md:col-span-2">
+<label class="block text-sm font-medium text-gray-700 mb-1">目的地/酒店名称</label>
+<div class="relative">
+<input type="text" class="w-full border border-gray-300 rounded-button pl-10 pr-4 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary" placeholder="请输入目的地或酒店名称">
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-map-pin-line"></i>
+</span>
+</div>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-medium text-gray-700 mb-1">入住日期</label>
+<div class="relative">
+<input type="date" class="w-full border border-gray-300 rounded-button pl-10 pr-4 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary">
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-calendar-line"></i>
+</span>
+</div>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-medium text-gray-700 mb-1">退房日期</label>
+<div class="relative">
+<input type="date" class="w-full border border-gray-300 rounded-button pl-10 pr-4 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary">
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-calendar-line"></i>
+</span>
+</div>
+</div>
+<div class="col-span-1 md:col-span-2">
+<label class="block text-sm font-medium text-gray-700 mb-1">房间和住客</label>
+<div class="relative">
+<button type="button" class="w-full border border-gray-300 rounded-button pl-10 pr-4 py-2 text-left focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary">
+1间房, 2位住客
+</button>
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-user-line"></i>
+</span>
+<span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-arrow-down-s-line"></i>
+</span>
+</div>
+</div>
+<div class="col-span-1 md:col-span-2">
+<label class="block text-sm font-medium text-gray-700 mb-1">关键词</label>
+<div class="relative">
+<input type="text" class="w-full border border-gray-300 rounded-button pl-10 pr-4 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary" placeholder="商圈/地铁/景点/品牌/星级">
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-search-line"></i>
+</span>
+</div>
+</div>
+<div class="col-span-1 md:col-span-4 flex justify-center">
+<button class="bg-primary hover:bg-primary/90 text-white px-12 py-2 !rounded-button whitespace-nowrap cursor-pointer inline-flex items-center">
+<a href="https://readdy.ai/home/bf749eeb-981d-4fd9-9d46-f85b866584fa/b20da7d5-929f-4a32-99a3-20cc6260adf0" data-readdy="true" class="w-5 h-5 inline-flex items-center justify-center mr-1"><i class="ri-search-line"></i></a>
+搜索酒店
+</button>
+</div>
+</div>
+</div>
+<!-- 接送机搜索表单 -->
+<div class="tab-content hidden" id="transferTab">
+<div class="mb-6">
+<div class="flex space-x-4">
+<button class="px-4 py-2 bg-primary text-white rounded-full text-sm">接机</button>
+<button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm hover:bg-gray-200">送机</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="col-span-1">
+<label class="block text-sm font-medium text-gray-700 mb-1">接车点</label>
+<div class="relative">
+<input type="text" id="pickupLocation" class="w-full border border-gray-300 rounded-button pl-10 pr-4 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary" placeholder="机场/详细地址">
+<input type="hidden" id="pickupLocationLat">
+<input type="hidden" id="pickupLocationLng">
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-map-pin-line"></i>
+</span>
+</div>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-medium text-gray-700 mb-1">目的地</label>
+<div class="relative">
+<input type="text" id="dropoffLocation" class="w-full border border-gray-300 rounded-button pl-10 pr-4 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary" placeholder="机场/详细地址">
+<input type="hidden" id="dropoffLocationCode">
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-map-pin-line"></i>
+</span>
+</div>
+<div id="airportResults" class="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg hidden max-h-60 overflow-y-auto"></div>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-medium text-gray-700 mb-1">日期</label>
+<div class="relative">
+<input type="date" class="w-full border border-gray-300 rounded-button pl-10 pr-4 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary">
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-calendar-line"></i>
+</span>
+</div>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-medium text-gray-700 mb-1">时间</label>
+<div class="relative">
+<input type="time" class="w-full border border-gray-300 rounded-button pl-10 pr-4 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary">
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-time-line"></i>
+</span>
+</div>
+</div>
+<div class="col-span-1 md:col-span-2">
+<label class="block text-sm font-medium text-gray-700 mb-1">乘客人数</label>
+<div class="relative">
+<button type="button" class="w-full border border-gray-300 rounded-button pl-10 pr-4 py-2 text-left focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary">
+2 位乘客, 2 件行李
+</button>
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-user-line"></i>
+</span>
+<span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-arrow-down-s-line"></i>
+</span>
+</div>
+</div>
+<div class="col-span-1 md:col-span-2">
+<label class="block text-sm font-medium text-gray-700 mb-1">航班号</label>
+<div class="relative">
+<input type="text" class="w-full border border-gray-300 rounded-button pl-10 pr-4 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary" placeholder="请输入航班号（选填）">
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-flight-takeoff-line"></i>
+</span>
+</div>
+</div>
+<div class="col-span-1 md:col-span-4 flex justify-center">
+<button class="bg-primary hover:bg-primary/90 text-white px-12 py-2 !rounded-button whitespace-nowrap cursor-pointer inline-flex items-center">
+<a href="https://readdy.ai/home/bf749eeb-981d-4fd9-9d46-f85b866584fa/b20da7d5-929f-4a32-99a3-20cc6260adf0" data-readdy="true" class="w-5 h-5 inline-flex items-center justify-center mr-1"><i class="ri-search-line"></i></a>
+搜索车辆
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 服务特色区域 -->
+<section class="container mx-auto px-4 py-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-white p-6 rounded shadow-sm flex items-center">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary rounded-full mr-4">
+<i class="ri-user-star-line text-2xl"></i>
+</div>
+<div>
+<h3 class="font-bold mb-1">专业华人导游</h3>
+<p class="text-sm text-gray-600">中文服务，无障碍沟通</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded shadow-sm flex items-center">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary rounded-full mr-4">
+<i class="ri-shield-check-line text-2xl"></i>
+</div>
+<div>
+<h3 class="font-bold mb-1">品质保证</h3>
+<p class="text-sm text-gray-600">精选行程，舒适体验</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded shadow-sm flex items-center">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary rounded-full mr-4">
+<i class="ri-wallet-3-line text-2xl"></i>
+</div>
+<div>
+<h3 class="font-bold mb-1">价格透明</h3>
+<p class="text-sm text-gray-600">无隐形消费，明码标价</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded shadow-sm flex items-center">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary rounded-full mr-4">
+<i class="ri-customer-service-2-line text-2xl"></i>
+</div>
+<div>
+<h3 class="font-bold mb-1">24小时客服</h3>
+<p class="text-sm text-gray-600">随时响应，解决问题</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 包车游精选区域 -->
+<section class="container mx-auto px-4 py-8">
+<div class="flex items-center mb-6">
+<h2 class="text-2xl font-bold flex items-center">
+<span class="w-6 h-6 flex items-center justify-center mr-2 text-primary"><i class="ri-taxi-line"></i></span>
+包车游精选
+</h2>
+</div>
+<div class="bg-blue-50 p-6 rounded-lg mb-6">
+<div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+<!-- 左侧介绍 -->
+<div class="md:col-span-1 flex flex-col justify-center">
+<h3 class="text-xl font-bold mb-4 text-primary">私家包车游</h3>
+<p class="text-gray-600 mb-4">专业司导服务，灵活行程安排，尊享舒适旅程</p>
+<a href="https://luxetrip.com.au/Charter-Tour.html" data-readdy="true" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 !rounded-button whitespace-nowrap self-start cursor-pointer inline-block">查看全部</a>
+</div>
+<!-- 右侧卡片 -->
+<div class="md:col-span-4 grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- 包车游卡片 1 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Sydney%2520Blue%2520Mountains%2520Three%2520Sisters%2520rock%2520formation%2520with%2520luxury%2520car%2520in%2520foreground%252C%2520scenic%2520mountain%2520views%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=31&orientation=landscape" alt="悉尼-蓝山" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">热门</div>
+</div>
+<div class="p-3">
+<h3 class="text-sm font-bold mb-1 line-clamp-2 h-10">【悉尼】蓝山一日包车游 含缆车门票</h3>
+<div class="text-primary font-bold text-sm">A$688<span class="text-xs font-normal">起/车</span></div>
+</div>
+</div>
+<!-- 包车游卡片 2 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Yarra%2520Valley%2520vineyards%2520with%2520luxury%2520car%2520in%2520foreground%252C%2520autumn%2520colors%252C%2520wine%2520barrels%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=32&orientation=landscape" alt="墨尔本-亚拉河谷" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">美食</div>
+</div>
+<div class="p-3">
+<h3 class="text-sm font-bold mb-1 line-clamp-2 h-10">【墨尔本】亚拉河谷酒庄一日包车游</h3>
+<div class="text-primary font-bold text-sm">A$788<span class="text-xs font-normal">起/车</span></div>
+</div>
+</div>
+<!-- 包车游卡片 3 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Gold%2520Coast%2520theme%2520parks%2520with%2520luxury%2520SUV%2520in%2520foreground%252C%2520rollercoaster%252C%2520sunny%2520day%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=33&orientation=landscape" alt="黄金海岸-主题乐园" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">亲子</div>
+</div>
+<div class="p-3">
+<h3 class="text-sm font-bold mb-1 line-clamp-2 h-10">【黄金海岸】主题乐园包车接送</h3>
+<div class="text-primary font-bold text-sm">A$488<span class="text-xs font-normal">起/车</span></div>
+</div>
+</div>
+<!-- 包车游卡片 4 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Cairns%2520Daintree%2520Rainforest%2520with%2520luxury%2520car%2520in%2520foreground%252C%2520tropical%2520landscape%252C%2520waterfalls%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=34&orientation=landscape" alt="凯恩斯-热带雨林" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">探险</div>
+</div>
+<div class="p-3">
+<h3 class="text-sm font-bold mb-1 line-clamp-2 h-10">【凯恩斯】热带雨林一日包车游</h3>
+<div class="text-primary font-bold text-sm">A$888<span class="text-xs font-normal">起/车</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+<!-- 包车游卡片 5 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Hunter%2520Valley%2520vineyards%2520with%2520luxury%2520car%2520in%2520foreground%252C%2520wine%2520tasting%2520setup%252C%2520sunset%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=35&orientation=landscape" alt="悉尼-猎人谷" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">品酒</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【悉尼】猎人谷酒庄一日包车游 含品酒体验</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-group-line"></i></span>
+<span>最多 6 人，含司导</span>
+</div>
+<div class="text-primary font-bold">A$788<span class="text-xs font-normal">起/车</span></div>
+</div>
+</div>
+<!-- 包车游卡片 6 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Phillip%2520Island%2520penguin%2520parade%2520with%2520luxury%2520car%2520in%2520foreground%252C%2520coastal%2520scenery%252C%2520sunset%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=36&orientation=landscape" alt="墨尔本-菲利普岛" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">观光</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【墨尔本】菲利普岛企鹅归巢包车游</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-group-line"></i></span>
+<span>最多 4 人，含司导</span>
+</div>
+<div class="text-primary font-bold">A$688<span class="text-xs font-normal">起/车</span></div>
+</div>
+</div>
+<!-- 包车游卡片 7 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Barossa%2520Valley%2520vineyards%2520with%2520luxury%2520car%2520in%2520foreground%252C%2520wine%2520cellar%252C%2520autumn%2520colors%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=37&orientation=landscape" alt="阿德莱德-巴罗萨" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">美食</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【阿德莱德】巴罗萨山谷美食包车游</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-group-line"></i></span>
+<span>最多 6 人，含司导</span>
+</div>
+<div class="text-primary font-bold">A$888<span class="text-xs font-normal">起/车</span></div>
+</div>
+</div>
+<!-- 包车游卡片 8 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Perth%2520Swan%2520Valley%2520with%2520luxury%2520car%2520in%2520foreground%252C%2520vineyards%252C%2520chocolate%2520factory%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=38&orientation=landscape" alt="珀斯-天鹅谷" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">休闲</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【珀斯】天鹅谷美食休闲包车游</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-group-line"></i></span>
+<span>最多 4 人，含司导</span>
+</div>
+<div class="text-primary font-bold">A$688<span class="text-xs font-normal">起/车</span></div>
+</div>
+</div>
+<!-- 包车游卡片 9 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Tasmania%2520Cradle%2520Mountain%2520with%2520luxury%2520SUV%2520in%2520foreground%252C%2520snow%2520capped%2520peaks%252C%2520wilderness%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=39&orientation=landscape" alt="塔斯马尼亚-摇篮山" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">自然</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【塔斯马尼亚】摇篮山国家公园包车游</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-group-line"></i></span>
+<span>最多 4 人，含司导</span>
+</div>
+<div class="text-primary font-bold">A$988<span class="text-xs font-normal">起/车</span></div>
+</div>
+</div>
+</div>
+</section>
+<!-- 澳洲精选路线区域 -->
+<section class="container mx-auto px-4 py-8">
+<div class="flex items-center mb-6">
+<h2 class="text-2xl font-bold flex items-center">
+<span class="w-6 h-6 flex items-center justify-center mr-2 text-primary"><i class="ri-route-line"></i></span>
+本地精选路线
+</h2>
+</div>
+<div class="bg-blue-50 p-6 rounded-lg mb-6">
+<div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+<!-- 左侧介绍 -->
+<div class="md:col-span-1 flex flex-col justify-center">
+<h3 class="text-xl font-bold mb-4 text-primary">本地精选路线</h3>
+<p class="text-gray-600 mb-4">专业华人导游带团，深度体验澳洲风情</p>
+<a href="https://luxetrip.com.au/local-tour.html" data-readdy="true" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 !rounded-button whitespace-nowrap self-start cursor-pointer inline-block">查看全部</a>
+</div>
+<!-- 右侧卡片 -->
+<div class="md:col-span-4 grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- 精选路线卡片 1 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Sydney%2520and%2520Melbourne%2520Australia%2520landmarks%2520collage%252C%2520Opera%2520House%252C%2520Harbour%2520Bridge%252C%2520Federation%2520Square%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=14&orientation=landscape" alt="悉尼墨尔本-双城记" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">畅销</div>
+</div>
+<div class="p-3">
+<h3 class="text-sm font-bold mb-1 line-clamp-2 h-10">【双城记】悉尼+墨尔本 6 天 5 晚精华游</h3>
+<div class="text-primary font-bold text-sm">A$899<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 精选路线卡片 2 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Gold%2520Coast%2520Australia%2520theme%2520parks%2520and%2520beaches%252C%2520Surfers%2520Paradise%2520skyline%252C%2520sunny%2520day%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=15&orientation=landscape" alt="黄金海岸-主题乐园" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">亲子</div>
+</div>
+<div class="p-3">
+<h3 class="text-sm font-bold mb-1 line-clamp-2 h-10">【欢乐假期】布里斯班+黄金海岸 5 天 4 晚</h3>
+<div class="text-primary font-bold text-sm">A$749<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 精选路线卡片 3 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Cairns%2520Great%2520Barrier%2520Reef%2520and%2520Daintree%2520Rainforest%2520Australia%252C%2520tropical%2520landscape%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=16&orientation=landscape" alt="凯恩斯-热带风情" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">热门</div>
+</div>
+<div class="p-3">
+<h3 class="text-sm font-bold mb-1 line-clamp-2 h-10">【热带风情】凯恩斯 4 天 3 晚 大堡礁+雨林</h3>
+<div class="text-primary font-bold text-sm">A$649<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 精选路线卡片 4 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Tasmania%2520Australia%2520with%2520Cradle%2520Mountain%252C%2520Wineglass%2520Bay%252C%2520lavender%2520fields%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=17&orientation=landscape" alt="塔斯马尼亚-自然之旅" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">小众</div>
+</div>
+<div class="p-3">
+<h3 class="text-sm font-bold mb-1 line-clamp-2 h-10">【自然之旅】塔斯马尼亚 5 天 4 晚深度游</h3>
+<div class="text-primary font-bold text-sm">A$799<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+<!-- 精选路线卡片 5 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Australia%2520East%2520Coast%2520highlights%2520with%2520Sydney%252C%2520Brisbane%252C%2520Gold%2520Coast%2520and%2520Cairns%252C%2520collage%2520of%2520landmarks%252C%2520professional%2520travel%2520photography&width=300&height=200&seq=18&orientation=landscape" alt="澳洲-东海岸精华" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">精华</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【东海岸精华】悉尼+布里斯班+凯恩斯 8 天 7 晚</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-calendar-line"></i></span>
+<span>6 月 20 日出发</span>
+</div>
+<div class="text-primary font-bold">A$1,199<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 精选路线卡片 6 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Perth%2520and%2520Western%2520Australia%2520with%2520Pinnacles%2520Desert%252C%2520Margaret%2520River%2520vineyards%252C%2520beautiful%2520beaches%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=19&orientation=landscape" alt="西澳-珀斯" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">小众</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【西澳风情】珀斯+玛格丽特河 6 天 5 晚</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-calendar-line"></i></span>
+<span>7 月 5 日出发</span>
+</div>
+<div class="text-primary font-bold">A$1,049<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 精选路线卡片 7 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Uluru%2520Ayers%2520Rock%2520Australia%2520at%2520sunset%252C%2520red%2520desert%252C%2520dramatic%2520sky%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=20&orientation=landscape" alt="乌鲁鲁-红土中心" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">特色</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【红土中心】乌鲁鲁+爱丽斯泉 4 天 3 晚</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-calendar-line"></i></span>
+<span>6 月 25 日出发</span>
+</div>
+<div class="text-primary font-bold">A$929<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 精选路线卡片 8 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Adelaide%2520and%2520Kangaroo%2520Island%2520Australia%2520with%2520vineyards%252C%2520wildlife%252C%2520coastal%2520landscapes%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=21&orientation=landscape" alt="阿德莱德-袋鼠岛" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">美食</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【美食之旅】阿德莱德+袋鼠岛+巴罗萨 5 天 4 晚</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-calendar-line"></i></span>
+<span>7 月 15 日出发</span>
+</div>
+<div class="text-primary font-bold">A$899<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 精选路线卡片 9 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Australia%2520grand%2520tour%2520with%2520Sydney%252C%2520Melbourne%252C%2520Great%2520Barrier%2520Reef%252C%2520Uluru%252C%2520collage%2520of%2520landmarks%252C%2520professional%2520travel%2520photography&width=300&height=200&seq=22&orientation=landscape" alt="澳洲-大环游" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">豪华</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【澳洲大环游】悉尼+墨尔本+凯恩斯+乌鲁鲁 12 天 11 晚</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-calendar-line"></i></span>
+<span>8 月 10 日出发</span>
+</div>
+<div class="text-primary font-bold">A$1,999<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+</div>
+</section>
+<!-- 中国出境游区域 -->
+<section class="container mx-auto px-4 py-8">
+<div class="flex items-center mb-6">
+<h2 class="text-2xl font-bold flex items-center">
+<span class="w-6 h-6 flex items-center justify-center mr-2 text-primary"><i class="ri-earth-line"></i></span>
+中国出境游精选
+</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- 左侧大图 -->
+<div class="md:col-span-1 bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="p-4 bg-primary text-white">
+<h3 class="text-lg font-bold mb-2">热门目的地</h3>
+<p class="text-sm mb-4">从澳洲出发，探索中国美景</p>
+<ul class="text-sm space-y-2">
+<li class="flex items-center">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-check-line"></i></span>
+<span>北京 - 长城故宫</span>
+</li>
+<li class="flex items-center">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-check-line"></i></span>
+<span>上海 - 都市风情</span>
+</li>
+<li class="flex items-center">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-check-line"></i></span>
+<span>西安 - 兵马俑古城</span>
+</li>
+<li class="flex items-center">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-check-line"></i></span>
+<span>桂林 - 山水甲天下</span>
+</li>
+<li class="flex items-center">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-check-line"></i></span>
+<span>成都 - 熊猫美食</span>
+</li>
+<li class="mt-4">
+<a href="https://luxetrip.com.au/China-tour.html" data-readdy="true" class="text-white hover:text-white/90 flex items-center">
+<span>查看更多</span>
+<span class="w-4 h-4 flex items-center justify-center ml-1"><i class="ri-arrow-right-line"></i></span>
+</a>
+</li>
+</ul>
+</div>
+<img src="https://readdy.ai/api/search-image?query=Collage%2520of%2520famous%2520Chinese%2520landmarks%2520including%2520Great%2520Wall%252C%2520Forbidden%2520City%252C%2520Li%2520River%2520karst%2520mountains%252C%2520Terracotta%2520Warriors%252C%2520professional%2520travel%2520photography%252C%2520vibrant%2520colors&width=300&height=300&seq=10&orientation=squarish" alt="中国热门目的地" class="w-full h-64 object-cover object-top">
+</div>
+<!-- 右侧卡片 -->
+<div class="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- 中国出境游卡片 1 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://static.readdy.ai/image/0778342f1150110d87eca34ce14b699d/42ee3e45cf845876ce653188cb8b9e2b.jpeg" alt="北京-长城" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">热门</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【北京】故宫+长城+颐和园 6 天 5 晚深度游</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-map-pin-line"></i></span>
+<span>北京市区，含接送机</span>
+</div>
+<div class="text-primary font-bold">A$819<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 中国出境游卡片 2 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Shanghai%2520skyline%2520with%2520Pudong%2520skyscrapers%2520and%2520the%2520Bund%2520waterfront%252C%2520night%2520scene%2520with%2520colorful%2520lights%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=12&orientation=landscape" alt="上海-外滩" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">都市</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【上海】外滩+迪士尼+周边水乡 5 天 4 晚</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-map-pin-line"></i></span>
+<span>上海市区，含接送机</span>
+</div>
+<div class="text-primary font-bold">A$709<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 中国出境游卡片 3 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Guilin%2520Li%2520River%2520karst%2520mountains%2520and%2520bamboo%2520rafts%2520in%2520China%252C%2520misty%2520morning%252C%2520reflections%2520in%2520water%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=13&orientation=landscape" alt="桂林-漓江" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">山水</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【桂林】漓江+阳朔+龙脊梯田 6 天 5 晚</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-map-pin-line"></i></span>
+<span>桂林市区，含接送机</span>
+</div>
+<div class="text-primary font-bold">A$769<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+</div>
+</div>
+<!-- 更多中国游线路 -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
+<!-- 中国出境游卡片 4 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Chengdu%2520Giant%2520Panda%2520Base%2520with%2520cute%2520pandas%2520eating%2520bamboo%252C%2520natural%2520habitat%252C%2520lush%2520greenery%252C%2520professional%2520wildlife%2520photography%252C%2520no%2520people&width=300&height=200&seq=23&orientation=landscape" alt="成都-熊猫基地" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">萌宠</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【成都】熊猫基地+锦里古街+都江堰 5 天 4 晚</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-calendar-line"></i></span>
+<span>6 月 15 日出发</span>
+</div>
+<div class="text-primary font-bold">A$729<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 中国出境游卡片 5 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Xian%2520ancient%2520city%2520wall%2520and%2520Terracotta%2520Warriors%252C%2520traditional%2520Chinese%2520architecture%252C%2520historical%2520landmarks%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=24&orientation=landscape" alt="西安-兵马俑" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">文化</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【西安】兵马俑+华山+大雁塔 6 天 5 晚</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-calendar-line"></i></span>
+<span>7 月 1 日出发</span>
+</div>
+<div class="text-primary font-bold">A$849<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 中国出境游卡片 6 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Yunnan%2520Lijiang%2520ancient%2520town%2520with%2520Jade%2520Dragon%2520Snow%2520Mountain%252C%2520traditional%2520Naxi%2520architecture%252C%2520cobblestone%2520streets%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=25&orientation=landscape" alt="云南-丽江" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">民族</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【云南】丽江+大理+香格里拉 8 天 7 晚</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-calendar-line"></i></span>
+<span>7 月 10 日出发</span>
+</div>
+<div class="text-primary font-bold">A$989<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 中国出境游卡片 7 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Huangshan%2520Yellow%2520Mountain%2520with%2520sea%2520of%2520clouds%252C%2520granite%2520peaks%252C%2520ancient%2520pine%2520trees%252C%2520sunrise%252C%2520professional%2520landscape%2520photography%252C%2520no%2520people&width=300&height=200&seq=26&orientation=landscape" alt="黄山-云海" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">自然</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【黄山】黄山+宏村+西递 5 天 4 晚</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-calendar-line"></i></span>
+<span>6 月 20 日出发</span>
+</div>
+<div class="text-primary font-bold">A$799<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+</div>
+</section>
+<!-- 全球出境游区域 -->
+<section class="container mx-auto px-4 py-8">
+<div class="flex items-center mb-6">
+<h2 class="text-2xl font-bold flex items-center">
+<span class="w-6 h-6 flex items-center justify-center mr-2 text-primary"><i class="ri-global-line"></i></span>
+全球出境游精选
+</h2>
+</div>
+<div class="bg-green-50 p-6 rounded-lg mb-6">
+<div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+<!-- 左侧介绍 -->
+<div class="md:col-span-1 flex flex-col justify-center">
+<h3 class="text-xl font-bold mb-4 text-primary">全球出境游</h3>
+<p class="text-gray-600 mb-4">从澳洲出发，探索世界各地的精彩</p>
+<a href="https://luxetrip.com.au/local-tour.html" data-readdy="true" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 !rounded-button whitespace-nowrap self-start cursor-pointer inline-block">查看全部</a>
+</div>
+<!-- 右侧卡片 -->
+<div class="md:col-span-4 grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- 全球出境游卡片 1 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Japan%2520Mount%2520Fuji%2520with%2520cherry%2520blossoms%252C%2520traditional%2520pagoda%2520in%2520foreground%252C%2520spring%2520season%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=14&orientation=landscape" alt="日本-富士山" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">热门</div>
+</div>
+<div class="p-3">
+<h3 class="text-sm font-bold mb-1 line-clamp-2 h-10">【日本】东京+大阪+京都 8 天 7 晚</h3>
+<div class="text-primary font-bold text-sm">A$1,499<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 全球出境游卡片 2 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=New%2520Zealand%2520Milford%2520Sound%2520with%2520dramatic%2520fjords%252C%2520waterfalls%252C%2520lush%2520vegetation%252C%2520perfect%2520reflection%2520in%2520calm%2520water%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=15&orientation=landscape" alt="新西兰-米尔福德峡湾" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">自然</div>
+</div>
+<div class="p-3">
+<h3 class="text-sm font-bold mb-1 line-clamp-2 h-10">【新西兰】南北岛 10 天 9 晚深度游</h3>
+<div class="text-primary font-bold text-sm">A$1,999<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 全球出境游卡片 3 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Paris%2520Eiffel%2520Tower%2520with%2520spring%2520cherry%2520blossoms%252C%2520beautiful%2520morning%2520light%252C%2520Seine%2520river%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=16&orientation=landscape" alt="法国-巴黎" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">浪漫</div>
+</div>
+<div class="p-3">
+<h3 class="text-sm font-bold mb-1 line-clamp-2 h-10">【欧洲】法国+意大利+瑞士 12 天 10 晚</h3>
+<div class="text-primary font-bold text-sm">A$2,599<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 全球出境游卡片 4 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Maldives%2520luxury%2520water%2520villas%2520with%2520infinity%2520pool%252C%2520crystal%2520clear%2520turquoise%2520water%252C%2520white%2520sandy%2520beach%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=17&orientation=landscape" alt="马尔代夫-水上别墅" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">蜜月</div>
+</div>
+<div class="p-3">
+<h3 class="text-sm font-bold mb-1 line-clamp-2 h-10">【马尔代夫】6 天 5 晚 奢华水上别墅</h3>
+<div class="text-primary font-bold text-sm">A$2,449<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+<!-- 全球出境游卡片 5 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=USA%2520New%2520York%2520City%2520skyline%2520with%2520Empire%2520State%2520Building%252C%2520Central%2520Park%2520autumn%2520colors%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=18&orientation=landscape" alt="美国-纽约" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">经典</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【美国】东西海岸 12 天 10 晚 纽约+洛杉矶+拉斯维加斯</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-calendar-line"></i></span>
+<span>6 月 20 日出发</span>
+</div>
+<div class="text-primary font-bold">A$2,899<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 全球出境游卡片 6 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Thailand%2520Phi%2520Phi%2520Island%2520with%2520longtail%2520boats%252C%2520crystal%2520clear%2520turquoise%2520water%252C%2520white%2520sandy%2520beach%252C%2520limestone%2520cliffs%252C%2520professional%2520travel%2520photography&width=300&height=200&seq=19&orientation=landscape" alt="泰国-普吉岛" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">超值</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【泰国】曼谷+普吉岛 8 天 7 晚 海岛度假</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-calendar-line"></i></span>
+<span>7 月 5 日出发</span>
+</div>
+<div class="text-primary font-bold">A$1,199<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 全球出境游卡片 7 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Italy%2520Venice%2520Grand%2520Canal%2520with%2520gondolas%252C%2520colorful%2520buildings%252C%2520sunset%2520golden%2520light%252C%2520professional%2520travel%2520photography%252C%2520no%2520people&width=300&height=200&seq=20&orientation=landscape" alt="意大利-威尼斯" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">文化</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【意大利】罗马+佛罗伦萨+威尼斯 9 天 8 晚</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-calendar-line"></i></span>
+<span>6 月 25 日出发</span>
+</div>
+<div class="text-primary font-bold">A$2,299<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 全球出境游卡片 8 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Singapore%2520Gardens%2520by%2520the%2520Bay%2520with%2520Supertree%2520Grove%2520and%2520Marina%2520Bay%2520Sands%252C%2520night%2520scene%2520with%2520colorful%2520lights%252C%2520professional%2520travel%2520photography&width=300&height=200&seq=21&orientation=landscape" alt="新加坡-滨海湾花园" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">亲子</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【新加坡】环球影城+滨海湾花园 6 天 5 晚</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-calendar-line"></i></span>
+<span>7 月 15 日出发</span>
+</div>
+<div class="text-primary font-bold">A$1,349<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+<!-- 全球出境游卡片 9 -->
+<div class="bg-white rounded shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=Greece%2520Santorini%2520with%2520blue%2520domed%2520churches%2520and%2520white%2520buildings%252C%2520Aegean%2520Sea%2520view%252C%2520sunset%2520golden%2520hour%252C%2520professional%2520travel%2520photography&width=300&height=200&seq=22&orientation=landscape" alt="希腊-圣托里尼" class="w-full h-48 object-cover object-top">
+<div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">浪漫</div>
+</div>
+<div class="p-4">
+<h3 class="text-base font-bold mb-2 line-clamp-2 h-12">【希腊】雅典+圣托里尼+米克诺斯 10 天 9 晚</h3>
+<div class="flex items-center text-sm text-gray-500 mb-2">
+<span class="w-4 h-4 flex items-center justify-center mr-1"><i class="ri-calendar-line"></i></span>
+<span>8 月 10 日出发</span>
+</div>
+<div class="text-primary font-bold">A$2,599<span class="text-xs font-normal">起/人</span></div>
+</div>
+</div>
+</div>
+</section>
+<!-- 私人定制区域 -->
+<section class="container mx-auto px-4 py-8">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-2xl font-bold flex items-center">
+<span class="w-6 h-6 flex items-center justify-center mr-2 text-primary"><i class="ri-vip-crown-line"></i></span>
+私人定制
+</h2>
+</div>
+<div class="bg-blue-50 p-8 rounded-lg">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- 左侧内容 -->
+<div>
+<h3 class="text-2xl font-bold mb-4 text-primary">专属您的旅行体验</h3>
+<p class="text-gray-600 mb-6">我们提供专业的私人定制旅行服务，根据您的需求和偏好，量身打造独一无二的旅行体验。</p>
+<ul class="space-y-4 mb-6">
+<li class="flex items-start">
+<span class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5"><i class="ri-check-line"></i></span>
+<div>
+<p class="font-medium">个性化行程</p>
+<p class="text-sm text-gray-600">根据您的兴趣和时间，定制专属行程</p>
+</div>
+</li>
+<li class="flex items-start">
+<span class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5"><i class="ri-check-line"></i></span>
+<div>
+<p class="font-medium">专属顾问</p>
+<p class="text-sm text-gray-600">一对一服务，全程跟进，随时调整</p>
+</div>
+</li>
+<li class="flex items-start">
+<span class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5"><i class="ri-check-line"></i></span>
+<div>
+<p class="font-medium">高端体验</p>
+<p class="text-sm text-gray-600">精选酒店、餐厅、活动，打造高品质旅行</p>
+</div>
+</li>
+<li class="flex items-start">
+<span class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5"><i class="ri-check-line"></i></span>
+<div>
+<p class="font-medium">灵活安排</p>
+<p class="text-sm text-gray-600">自由选择出行时间、同行人数、行程节奏</p>
+</div>
+</li>
+</ul>
+<div class="flex space-x-4">
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-2 !rounded-button whitespace-nowrap cursor-pointer">立即咨询</button>
+<button class="border border-primary text-primary hover:bg-primary/10 px-6 py-2 !rounded-button whitespace-nowrap cursor-pointer">了解更多</button>
+</div>
+</div>
+<!-- 右侧表单 -->
+<div class="bg-white p-6 rounded-lg shadow-sm">
+<h4 class="text-lg font-bold mb-4">私人定制咨询</h4>
+<form>
+<div class="mb-4">
+<label class="block text-sm font-medium text-gray-700 mb-1">您的姓名</label>
+<input type="text" class="w-full border border-gray-300 rounded-button px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm" placeholder="请输入您的姓名">
+</div>
+<div class="mb-4">
+<label class="block text-sm font-medium text-gray-700 mb-1">联系电话</label>
+<input type="tel" class="w-full border border-gray-300 rounded-button px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm" placeholder="请输入您的联系电话">
+</div>
+<div class="mb-4">
+<label class="block text-sm font-medium text-gray-700 mb-1">电子邮箱</label>
+<input type="email" class="w-full border border-gray-300 rounded-button px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm" placeholder="请输入您的电子邮箱">
+</div>
+<div class="mb-4">
+<label class="block text-sm font-medium text-gray-700 mb-1">目的地</label>
+<input type="text" class="w-full border border-gray-300 rounded-button px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm" placeholder="请输入您想去的目的地">
+</div>
+<div class="mb-4">
+<label class="block text-sm font-medium text-gray-700 mb-1">出行时间</label>
+<input type="date" class="w-full border border-gray-300 rounded-button px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm">
+</div>
+<div class="mb-4">
+<label class="block text-sm font-medium text-gray-700 mb-1">出行人数</label>
+<input type="number" class="w-full border border-gray-300 rounded-button px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm" placeholder="请输入出行人数" min="1" value="2">
+</div>
+<div class="mb-4">
+<label class="block text-sm font-medium text-gray-700 mb-1">特殊需求</label>
+<textarea class="w-full border border-gray-300 rounded-button px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm h-24" placeholder="请描述您的特殊需求或偏好"></textarea>
+</div>
+<button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white py-2 !rounded-button whitespace-nowrap cursor-pointer">提交需求</button>
+</form>
+</div>
+</div>
+</div>
+</section>
+<!-- 页脚 -->
+<footer class="bg-gray-800 text-white pt-12 pb-6">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+<!-- 关于我们 -->
+<div>
+<h3 class="text-lg font-bold mb-4">关于我们</h3>
+<ul class="space-y-2 text-gray-300 text-sm">
+<li><a href="https://readdy.ai/home/bf749eeb-981d-4fd9-9d46-f85b866584fa/07f5dcd3-f011-466e-98b4-1402c5967157" data-readdy="true" class="hover:text-primary cursor-pointer">公司简介</a></li>
+<li><a href="#" class="hover:text-primary cursor-pointer">企业文化</a></li>
+<li><a href="#" class="hover:text-primary cursor-pointer">荣誉资质</a></li>
+<li><a href="#" class="hover:text-primary cursor-pointer">招聘信息</a></li>
+<li><a href="#" class="hover:text-primary cursor-pointer">联系我们</a></li>
+</ul>
+</div>
+<!-- 旅游服务 -->
+<div>
+<h3 class="text-lg font-bold mb-4">旅游服务</h3>
+<ul class="space-y-2 text-gray-300 text-sm">
+<li><a href="#" class="hover:text-primary cursor-pointer">澳洲当地游</a></li>
+<li><a href="#" class="hover:text-primary cursor-pointer">中国出境游</a></li>
+<li><a href="#" class="hover:text-primary cursor-pointer">全球出境游</a></li>
+<li><a href="#" class="hover:text-primary cursor-pointer">接送机服务</a></li>
+<li><a href="#" class="hover:text-primary cursor-pointer">私人定制</a></li>
+</ul>
+</div>
+<!-- 帮助中心 -->
+<div>
+<h3 class="text-lg font-bold mb-4">帮助中心</h3>
+<ul class="space-y-2 text-gray-300 text-sm">
+<li><a href="#" class="hover:text-primary cursor-pointer">预订须知</a></li>
+<li><a href="#" class="hover:text-primary cursor-pointer">旅游攻略</a></li>
+<li><a href="#" class="hover:text-primary cursor-pointer">签证指南</a></li>
+<li><a href="#" class="hover:text-primary cursor-pointer">常见问题</a></li>
+<li><a href="#" class="hover:text-primary cursor-pointer">意见反馈</a></li>
+</ul>
+</div>
+<!-- 联系方式 -->
+<div>
+<h3 class="text-lg font-bold mb-4">联系方式</h3>
+<ul class="space-y-3 text-gray-300 text-sm">
+<li class="flex items-start">
+<span class="w-4 h-4 flex items-center justify-center mr-2 mt-1"><i class="ri-customer-service-2-line"></i></span>
+<span>客服热线：0478776998<br>(09:00-22:00)</span>
+</li>
+<li class="flex items-start">
+<span class="w-4 h-4 flex items-center justify-center mr-2 mt-1"><i class="ri-mail-line"></i></span>
+<span>客服邮箱：service@luxetrip.com.au</span>
+</li>
+<li class="flex items-start">
+<span class="w-4 h-4 flex items-center justify-center mr-2 mt-1"><i class="ri-map-pin-line"></i></span>
+<span>总部地址：悉尼</span>
+</li>
+</ul>
+<div class="flex space-x-4 mt-4">
+<a href="#" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-primary cursor-pointer">
+<i class="ri-wechat-fill"></i>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-primary cursor-pointer">
+<i class="ri-weibo-fill"></i>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-primary cursor-pointer">
+<i class="ri-instagram-line"></i>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-primary cursor-pointer">
+<i class="ri-facebook-fill"></i>
+</a>
+</div>
+</div>
+</div>
+<!-- 支付方式 -->
+<div class="border-t border-gray-700 pt-6 pb-4">
+<div class="flex flex-wrap items-center justify-center space-x-6">
+<span class="text-gray-400 text-sm">支付方式：</span>
+<span class="w-8 h-8 flex items-center justify-center text-gray-300"><i class="ri-alipay-fill text-2xl"></i></span>
+<span class="w-8 h-8 flex items-center justify-center text-gray-300"><i class="ri-wechat-pay-fill text-2xl"></i></span>
+<span class="w-8 h-8 flex items-center justify-center text-gray-300"><i class="ri-visa-fill text-2xl"></i></span>
+<span class="w-8 h-8 flex items-center justify-center text-gray-300"><i class="ri-mastercard-fill text-2xl"></i></span>
+<span class="w-8 h-8 flex items-center justify-center text-gray-300"><i class="ri-paypal-fill text-2xl"></i></span>
+<span class="w-8 h-8 flex items-center justify-center text-gray-300"><i class="ri-bank-card-fill text-2xl"></i></span>
+</div>
+</div>
+<!-- 版权信息 -->
+<div class="border-t border-gray-700 pt-6 text-center text-gray-400 text-sm">
+<p>© 2025 Luxetrip 澳洲旅行专家 版权所有</p>
+</div>
+</div>
+</footer>
+<!-- 返回顶部按钮 -->
+<button id="backToTop" class="fixed bottom-8 right-8 w-10 h-10 bg-primary text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 cursor-pointer">
+<i class="ri-arrow-up-line"></i>
+</button>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLTzjg39o85Yvvuagb-s8v4iOoMHD0fNY&libraries=places" async defer></script>
+<script id="bookingTabsScript">
+document.addEventListener('DOMContentLoaded', function() {
+try {
+// Function to scroll to booking section
+function scrollToBooking() {
+const bookingSection = document.querySelector('.container .bg-white.rounded-lg.shadow-lg');
+if (bookingSection) {
+bookingSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+}
+// Tab switching functionality
+function switchTab(tabId) {
+const tabButtons = document.querySelectorAll('[data-tab]');
+const tabContents = document.querySelectorAll('.tab-content');
+
+// Update tab buttons
+tabButtons.forEach(button => {
+const isActive = button.getAttribute('data-tab') === tabId;
+// Update indicator bar
+const indicator = button.querySelector('.absolute.bottom-0');
+if (indicator) {
+indicator.style.transform = isActive ? 'scaleX(1)' : 'scaleX(0)';
+}
+// Update text color
+button.style.color = isActive ? '#FF6B00' : '#4B5563';
+});
+
+// Update tab contents
+tabContents.forEach(content => {
+content.classList.toggle('hidden', content.id !== `${tabId}Tab`);
+});
+}
+// Add click event listeners to tab buttons
+document.querySelectorAll('[data-tab]').forEach(button => {
+button.addEventListener('click', () => {
+const tabId = button.getAttribute('data-tab');
+switchTab(tabId);
+});
+});
+// Initialize with flight tab active
+switchTab('flight');
+// Add click event listener for transfer tab
+const transferTabButton = document.getElementById('transferTab');
+if (transferTabButton) {
+transferTabButton.addEventListener('click', () => {
+switchTab('transfer');
+});
+}
+// Add click event listener for transfer nav link
+const transferNavLink = document.querySelector('nav [data-lang-nav-transfer]');
+if (transferNavLink) {
+transferNavLink.addEventListener('click', (e) => {
+e.preventDefault();
+switchTab('transfer');
+scrollToBooking();
+});
+}
+const australianAirports = [
+{ code: 'SYD', name: 'Sydney Airport', city: 'Sydney' },
+{ code: 'MEL', name: 'Melbourne Airport', city: 'Melbourne' },
+{ code: 'BNE', name: 'Brisbane Airport', city: 'Brisbane' },
+{ code: 'PER', name: 'Perth Airport', city: 'Perth' },
+{ code: 'ADL', name: 'Adelaide Airport', city: 'Adelaide' },
+{ code: 'CBR', name: 'Canberra Airport', city: 'Canberra' },
+{ code: 'DRW', name: 'Darwin Airport', city: 'Darwin' },
+{ code: 'OOL', name: 'Gold Coast Airport', city: 'Gold Coast' },
+{ code: 'CNS', name: 'Cairns Airport', city: 'Cairns' },
+{ code: 'HBA', name: 'Hobart Airport', city: 'Hobart' }
+];
+// 初始化 Google Places Autocomplete
+const pickupInput = document.getElementById('pickupLocation');
+const pickupLat = document.getElementById('pickupLocationLat');
+const pickupLng = document.getElementById('pickupLocationLng');
+function initGooglePlaces() {
+if (window.google && window.google.maps && window.google.maps.places) {
+const autocomplete = new google.maps.places.Autocomplete(pickupInput, {
+componentRestrictions: { country: 'AU' },
+fields: ['formatted_address', 'geometry', 'name'],
+types: ['address']
+});
+// 防止回车键提交表单
+pickupInput.addEventListener('keydown', (e) => {
+if (e.key === 'Enter') {
+e.preventDefault();
+}
+});
+// 监听地址选择事件
+autocomplete.addListener('place_changed', () => {
+try {
+const place = autocomplete.getPlace();
+if (!place.geometry) {
+pickupInput.value = '';
+return;
+}
+// 更新经纬度
+if (pickupLat && pickupLng) {
+pickupLat.value = place.geometry.location.lat();
+pickupLng.value = place.geometry.location.lng();
+}
+// 更新输入框显示完整地址
+pickupInput.value = place.formatted_address;
+} catch (error) {
+console.error('Error in place_changed event:', error);
+}
+});
+// 添加输入事件监听
+pickupInput.addEventListener('input', () => {
+try {
+// 清空经纬度值
+if (pickupLat && pickupLng) {
+pickupLat.value = '';
+pickupLng.value = '';
+}
+} catch (error) {
+console.error('Error in input event:', error);
+}
+});
+}
+}
+// 检查并初始化 Google Places
+if (pickupInput) {
+const checkGoogleMapsInterval = setInterval(() => {
+if (window.google && window.google.maps && window.google.maps.places) {
+clearInterval(checkGoogleMapsInterval);
+initGooglePlaces();
+}
+}, 100);
+// 设置超时，避免无限检查
+setTimeout(() => {
+clearInterval(checkGoogleMapsInterval);
+}, 10000);
+}
+// 机场搜索功能
+const dropoffInput = document.getElementById('dropoffLocation');
+const airportResults = document.getElementById('airportResults');
+const dropoffCode = document.getElementById('dropoffLocationCode');
+if (dropoffInput && airportResults) {
+dropoffInput.addEventListener('input', (e) => {
+try {
+const searchTerm = e.target.value.toLowerCase();
+if (searchTerm.length < 2) {
+airportResults.classList.add('hidden');
+return;
+}
+const matches = australianAirports.filter(airport =>
+airport.code.toLowerCase().includes(searchTerm) ||
+airport.name.toLowerCase().includes(searchTerm) ||
+airport.city.toLowerCase().includes(searchTerm)
+);
+if (matches.length > 0) {
+airportResults.innerHTML = matches.map(airport => `
+<div class="p-3 hover:bg-gray-100 cursor-pointer flex items-center" data-code="${airport.code}">
+<span class="w-5 h-5 flex items-center justify-center mr-2 text-primary">
+<i class="ri-flight-takeoff-line"></i>
+</span>
+<div>
+<div class="font-medium">${airport.name}</div>
+<div class="text-sm text-gray-500">${airport.city} (${airport.code})</div>
+</div>
+</div>
+`).join('');
+airportResults.classList.remove('hidden');
+// 添加点击事件
+airportResults.querySelectorAll('div[data-code]').forEach(div => {
+div.addEventListener('click', () => {
+const airport = matches.find(a => a.code === div.dataset.code);
+dropoffInput.value = `${airport.name} (${airport.code})`;
+dropoffCode.value = airport.code;
+airportResults.classList.add('hidden');
+});
+});
+} else {
+airportResults.innerHTML = `
+<div class="p-3 text-gray-500 text-center">
+未找到匹配的机场
+</div>
+`;
+airportResults.classList.remove('hidden');
+}
+});
+// 点击其他地方时隐藏结果
+document.addEventListener('click', (e) => {
+if (!dropoffInput.contains(e.target) && !airportResults.contains(e.target)) {
+airportResults.classList.add('hidden');
+}
+});
+}
+const tabButtons = document.querySelectorAll('[data-tab]');
+const tabContents = document.querySelectorAll('.tab-content');
+const transferTypeButtons = document.querySelectorAll('[data-transfer-type]');
+function switchTab(tabId) {
+tabButtons.forEach(button => {
+if (button.dataset.tab === tabId) {
+button.classList.add('active');
+button.querySelector('.bg-primary').classList.add('scale-x-100');
+} else {
+button.classList.remove('active');
+button.querySelector('.bg-primary').classList.remove('scale-x-100');
+}
+});
+tabContents.forEach(content => {
+if (content.id === tabId + 'Tab') {
+content.classList.remove('hidden');
+} else {
+content.classList.add('hidden');
+}
+});
+}
+tabButtons.forEach(button => {
+button.addEventListener('click', () => {
+switchTab(button.dataset.tab);
+});
+});
+transferTypeButtons.forEach(button => {
+button.addEventListener('click', () => {
+transferTypeButtons.forEach(btn => {
+btn.classList.remove('bg-primary', 'text-white');
+btn.classList.add('bg-white', 'text-gray-600');
+});
+button.classList.remove('bg-white', 'text-gray-600');
+button.classList.add('bg-primary', 'text-white');
+});
+});
+switchTab('flight');
+} catch (error) {
+console.error('Error in booking tabs initialization:', error);
+}
+});
+</script>
+<script id="backToTopScript">
+document.addEventListener('DOMContentLoaded', function() {
+// UI Elements
+const backToTopButton = document.getElementById('backToTop');
+const languageSelector = document.getElementById('languageSelector');
+const languageMenu = document.getElementById('languageMenu');
+const currentLang = document.getElementById('currentLang');
+const customerServiceLink = document.getElementById('customerServiceLink');
+const customerServiceDialog = document.getElementById('customerServiceDialog');
+const closeDialog = document.getElementById('closeDialog');
+const slides = document.querySelectorAll('.slide');
+const indicators = document.querySelectorAll('.slide-indicator');
+// Check essential elements
+if (!backToTopButton || !languageSelector || !languageMenu || !currentLang) {
+console.warn('Essential UI elements not found');
+return;
+}
+// Language Switcher
+languageSelector.addEventListener('click', function(e) {
+e.stopPropagation();
+languageMenu.classList.toggle('hidden');
+});
+document.addEventListener('click', function() {
+if (languageMenu) languageMenu.classList.add('hidden');
+});
+if (languageMenu) {
+languageMenu.addEventListener('click', function(e) {
+if (e.target.tagName === 'A') {
+e.preventDefault();
+const selectedLang = e.target.dataset.lang;
+currentLang.textContent = selectedLang === 'zh' ? '中文' : 'English';
+languageMenu.classList.add('hidden');
+const elements = {
+'.text-primary': {
+'zh': '澳洲旅行专家',
+'en': 'Australia Travel Expert'
+},
+'[data-lang-welcome]': {
+'zh': '欢迎来到 LuxeTrip澳洲旅行专家',
+'en': 'Welcome to LuxeTrip Australia Travel Expert'
+},
+'[data-lang-login]': {
+'zh': '登录',
+'en': 'Login'
+},
+'[data-lang-register]': {
+'zh': '注册',
+'en': 'Register'
+},
+'[data-lang-customer-service]': {
+'zh': '客服热线: 0478776998',
+'en': 'Customer Service: 0478776998'
+},
+'[data-lang-member-center]': {
+'zh': '会员中心',
+'en': 'Member Center'
+},
+'[data-lang-my-orders]': {
+'zh': '我的订单',
+'en': 'My Orders'
+},
+'[data-lang-nav-home]': {
+'zh': '首页',
+'en': 'Home'
+},
+'[data-lang-nav-local]': {
+'zh': '澳洲当地游',
+'en': 'Australia Local Tours'
+},
+'[data-lang-nav-china]': {
+'zh': '中国游',
+'en': 'China Tours'
+},
+'[data-lang-nav-global]': {
+'zh': '出境游',
+'en': 'Outbound Tours'
+},
+'[data-lang-nav-transfer]': {
+'zh': '接送机',
+'en': 'Transfer'
+},
+'[data-lang-nav-hotel]': {
+'zh': '酒店',
+'en': 'Hotels'
+},
+'[data-lang-nav-flight]': {
+'zh': '机票',
+'en': 'Flights'
+},
+'[data-lang-nav-visa]': {
+'zh': '最新消息',
+'en': 'News'
+},
+'[data-lang-nav-custom]': {
+'zh': '私人定制',
+'en': 'Custom Tours'
+},
+'[data-lang-nav-business]': {
+'zh': '门票',
+'en': 'Tickets'
+}
+};
+for (let selector in elements) {
+document.querySelectorAll(selector).forEach(el => {
+if (el) el.textContent = elements[selector][selectedLang];
+});
+}
+}
+});
+}
+// Slideshow functionality
+let currentSlide = 0;
+let slideInterval;
+function showSlide(index) {
+try {
+if (!slides.length || !indicators.length) return;
+slides.forEach(slide => {
+if (slide) slide.style.opacity = '0';
+});
+indicators.forEach(indicator => {
+if (indicator) indicator.classList.replace('bg-primary', 'bg-white/50');
+});
+if (slides[index] && indicators[index]) {
+slides[index].style.opacity = '1';
+indicators[index].classList.replace('bg-white/50', 'bg-primary');
+}
+} catch (error) {
+console.error('Error in showSlide:', error);
+}
+}
+function nextSlide() {
+try {
+if (!slides.length) return;
+currentSlide = (currentSlide + 1) % slides.length;
+showSlide(currentSlide);
+} catch (error) {
+console.error('Error in nextSlide:', error);
+}
+}
+function startSlideShow() {
+try {
+if (!slides.length) return;
+showSlide(0);
+if (slideInterval) clearInterval(slideInterval);
+slideInterval = setInterval(nextSlide, 5000);
+} catch (error) {
+console.error('Error in startSlideShow:', error);
+}
+}
+// Initialize slideshow
+if (slides.length && indicators.length) {
+indicators.forEach((indicator, index) => {
+if (indicator) {
+indicator.addEventListener('click', () => {
+try {
+clearInterval(slideInterval);
+currentSlide = index;
+showSlide(currentSlide);
+slideInterval = setInterval(nextSlide, 5000);
+} catch (error) {
+console.error('Error in indicator click handler:', error);
+}
+});
+}
+});
+startSlideShow();
+}
+// Customer service dialog
+if (customerServiceLink && customerServiceDialog && closeDialog) {
+customerServiceLink.addEventListener('click', function(e) {
+e.preventDefault();
+customerServiceDialog.classList.remove('hidden');
+document.body.style.overflow = 'hidden';
+});
+closeDialog.addEventListener('click', function() {
+customerServiceDialog.classList.add('hidden');
+document.body.style.overflow = '';
+});
+customerServiceDialog.addEventListener('click', function(e) {
+if (e.target === this) {
+customerServiceDialog.classList.add('hidden');
+document.body.style.overflow = '';
+}
+});
+}
+// Back to top functionality
+window.addEventListener('scroll', function() {
+try {
+if (window.pageYOffset > 300) {
+backToTopButton.classList.remove('opacity-0', 'invisible');
+backToTopButton.classList.add('opacity-100', 'visible');
+} else {
+backToTopButton.classList.remove('opacity-100', 'visible');
+backToTopButton.classList.add('opacity-0', 'invisible');
+}
+} catch (error) {
+console.error('Error in scroll handler:', error);
+}
+});
+backToTopButton.addEventListener('click', function() {
+window.scrollTo({
+top: 0,
+behavior: 'smooth'
+});
+});
+// Quantity buttons
+const minusBtns = document.querySelectorAll('button[type="button"]:first-child');
+const plusBtns = document.querySelectorAll('button[type="button"]:last-child');
+minusBtns.forEach(btn => {
+if (btn) {
+btn.addEventListener('click', function() {
+const input = this.nextElementSibling;
+if (input) {
+let value = parseInt(input.value);
+if (value > parseInt(input.min || '0')) {
+input.value = value - 1;
+}
+}
+});
+}
+});
+plusBtns.forEach(btn => {
+if (btn) {
+btn.addEventListener('click', function() {
+const input = this.previousElementSibling;
+if (input) {
+let value = parseInt(input.value);
+input.value = value + 1;
+}
+});
+}
+});
+// Radio buttons
+const radioInputs = document.querySelectorAll('input[type="radio"]');
+radioInputs.forEach(input => {
+if (input) {
+input.addEventListener('change', function() {
+const radioButtons = document.querySelectorAll('input[name="' + this.name + '"]');
+radioButtons.forEach(radio => {
+const span = radio.nextElementSibling?.querySelector('span');
+if (span) {
+if (radio.checked) {
+span.classList.add('scale-100');
+} else {
+span.classList.remove('scale-100');
+}
+}
+});
+});
+// Initialize checked radio buttons
+if (input.checked) {
+const span = input.nextElementSibling?.querySelector('span');
+if (span) span.classList.add('scale-100');
+}
+}
+});
+});
+</script>
+<div id="customerServiceDialog" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+<div class="bg-white rounded-lg w-96 shadow-xl">
+<div class="p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl font-bold">联系客服</h3>
+<button id="closeDialog" class="text-gray-500 hover:text-gray-700 cursor-pointer">
+<i class="ri-close-line text-xl"></i>
+</button>
+</div>
+<div class="space-y-4">
+<div class="flex items-center text-lg">
+<i class="ri-customer-service-2-line text-primary mr-3"></i>
+<span class="font-bold">0478776998</span>
+</div>
+<div class="text-gray-600 text-sm">
+服务时间：09:00 - 22:00
+</div>
+<div class="flex space-x-4">
+<a href="tel:0478776998" class="flex-1 bg-primary hover:bg-primary/90 text-white py-2 text-center !rounded-button cursor-pointer">
+<i class="ri-phone-line mr-2"></i>立即拨打
+</a>
+<button class="flex-1 border border-primary text-primary hover:bg-primary/10 py-2 !rounded-button cursor-pointer">
+<i class="ri-message-3-line mr-2"></i>在线咨询
+</button>
+</div>
+<div class="mt-6">
+<div class="text-gray-700 font-medium mb-2">常见问题</div>
+<div class="space-y-2 text-sm">
+<a href="#" class="block text-gray-600 hover:text-primary cursor-pointer">
+<i class="ri-question-line mr-2"></i>如何预订旅游产品？
+</a>
+<a href="#" class="block text-gray-600 hover:text-primary cursor-pointer">
+<i class="ri-question-line mr-2"></i>退改政策说明
+</a>
+<a href="#" class="block text-gray-600 hover:text-primary cursor-pointer">
+<i class="ri-question-line mr-2"></i>支付方式有哪些？
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
